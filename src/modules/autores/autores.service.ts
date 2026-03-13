@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { CriarAutordto } from './autores.dto';
 
 let autores = [
   {
@@ -30,5 +31,18 @@ export class AutoresService {
     }
 
     return autorEncontrado;
+  }
+
+  criarAutor(bodyRequest: CriarAutordto) {
+    if (!bodyRequest.nome || !bodyRequest.email) {
+      return 'Nome e Email sao obrigatorios';
+    }
+    autores.push({
+      id: autores.length + 1,
+      nome: bodyRequest.nome,
+      email: bodyRequest.email,
+    });
+
+    return autores;
   }
 }
