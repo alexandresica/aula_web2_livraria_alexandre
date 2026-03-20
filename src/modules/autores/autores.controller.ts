@@ -5,9 +5,10 @@ import {
   Param,
   ParseIntPipe,
   Post,
+  Put,
 } from '@nestjs/common';
 import { AutoresService } from './autores.service';
-import { CriarAutordto } from './autores.dto';
+import { AtualizarAutordto, CriarAutordto } from './autores.dto';
 
 @Controller('autores')
 export class AutoresController {
@@ -26,5 +27,13 @@ export class AutoresController {
   @Post('/criar-autor')
   criarAutor(@Body() bodyRequest: CriarAutordto) {
     return this.autoresService.criarAutor(bodyRequest);
+  }
+
+  @Put('/atualizar-autor/:id')
+  atualizarAutor(
+    @Param('id', ParseIntPipe) idautor: number,
+    @Body() bodyrequest: AtualizarAutordto,
+  ) {
+    return this.autoresService.atualizarAutor(idautor, bodyrequest);
   }
 }
