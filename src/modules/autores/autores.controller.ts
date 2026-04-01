@@ -17,7 +17,7 @@ export class AutoresController {
 
   @Get('/listar-autores')
   listarAutores() {
-    return this.autoresService.listarAutores;
+    return this.autoresService.listarAutores();
   }
 
   @Get('/listar-autor/:id')
