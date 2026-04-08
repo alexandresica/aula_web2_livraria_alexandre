@@ -1,6 +1,6 @@
 import { Global, Module } from '@nestjs/common';
 import { DRIZZLE } from './database.constants';
-import { drizzle } from 'drizzle-orm/node-postgres';
+import { drizzle } from 'drizzle-orm/node-mssql';
 import * as schema from '../schemas';
 
 @Global()
@@ -10,7 +10,7 @@ import * as schema from '../schemas';
       provide: DRIZZLE,
       inject: [],
       useFactory: () => {
-        return drizzle('', { schema });
+        return drizzle('', { schema: schema });
       },
     },
   ],
