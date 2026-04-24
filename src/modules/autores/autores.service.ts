@@ -31,45 +31,36 @@ export class AutoresService {
     return await this.autoresRepository.listarAutores;
   }
 
-  listarAutor(id: number) {
-    const autorEncontrado = autores.find((autor) => autor.id === id);
-    if (!autorEncontrado) {
-      throw new NotFoundException('Autor não encontrado');
+  async listarAutor(id: number) {
+    const autorEncontrado = await this.autoresRepository.listarAutor(id);
+    if (autorEncontrado.length === 0) {
+      throw new NotFoundException(`Autor com o id ${id} não encontrado`);
     }
 
     return autorEncontrado;
   }
 
   criarAutor(bodyRequest: CriarAutordto) {
-    if (!bodyRequest.nome || !bodyRequest.email) {
-      return 'Nome e Email sao obrigatorios';
-    }
-    autores.push({
-      id: autores.length + 1,
-      nome: bodyRequest.nome,
-      email: bodyRequest.email,
-    });
-
-    return autores;
+    return this.autoresRepository.criarAutor(bodyRequest);
   }
 
-  atualizarAutor(idAutor: number, bodyRequest: AtualizarAutordto) {
-    const autorEncontrado = this.listarAutor(idAutor);
+  // atualizarAutor(idAutor: number, bodyRequest: AtualizarAutordto) {
+  //   const autorEncontrado = this.listarAutor(idAutor);
 
-    if (!bodyRequest.nome && !bodyRequest.email) {
-      throw new BadRequestException('Nome e email são obrigatórios');
-    }
+  //   if (!bodyRequest.nome && !bodyRequest.email) {
+  //     throw new BadRequestException('Nome e email são obrigatórios');
+  //   }
 
-    if (bodyRequest.nome) {
-      autorEncontrado.nome = bodyRequest.nome;
-    }
+  //   if (bodyRequest.nome) {
+  //     autorEncontrado.nome = bodyRequest.nome;
+  //   }
 
-    if (bodyRequest.email) {
-      autorEncontrado.email = bodyRequest.email;
-    }
+  //   if (bodyRequest.email) {
+  //     autorEncontrado.email = bodyRequest.email;
+  //   }
 
-    return autorEncontrado;
-  }
+  //   return autorEncontrado;
+  // }
 
   deletarAutor(idAutor: number) {
     this.listarAutor(idAutor);

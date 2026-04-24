@@ -35,7 +35,7 @@ export class AutoresController {
     @Param('id', ParseIntPipe) idautor: number,
     @Body() bodyrequest: AtualizarAutordto,
   ) {
-    return this.autoresService.atualizarAutor(idautor, bodyrequest);
+    // return this.autoresService.atualizarAutor(idautor, bodyrequest);
   }
 
   @Delete('/deletar-autor/:id')
