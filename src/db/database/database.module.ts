@@ -13,7 +13,7 @@ import * as schema from '../schemas';
       inject: [],
       useFactory: async () => {
         const dbconfig: MsSqlConfig = {
-          server: 'SRV-DB-1',
+          server: 'SRV-BD-1',
           port: 1433,
           user: 'alunos_des225',
           password: '123',
