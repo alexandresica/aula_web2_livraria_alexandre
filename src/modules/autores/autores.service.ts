@@ -28,12 +28,12 @@ export class AutoresService {
   constructor(private readonly autoresRepository: AutoresRepository) {}
 
   async listarAutores() {
-    return await this.autoresRepository.listarAutores;
+    return this.autoresRepository.listarAutores();
   }
 
   async listarAutor(id: number) {
     const autorEncontrado = await this.autoresRepository.listarAutor(id);
-    if (autorEncontrado.length === 0) {
+    if (!autorEncontrado) {
       throw new NotFoundException(`Autor com o id ${id} não encontrado`);
     }
 
@@ -44,23 +44,11 @@ export class AutoresService {
     return this.autoresRepository.criarAutor(bodyRequest);
   }
 
-  // atualizarAutor(idAutor: number, bodyRequest: AtualizarAutordto) {
-  //   const autorEncontrado = this.listarAutor(idAutor);
+  async atualizarAutor(idAutor: number, bodyRequest: AtualizarAutordto) {
+    await this.listarAutor(idAutor);
 
-  //   if (!bodyRequest.nome && !bodyRequest.email) {
-  //     throw new BadRequestException('Nome e email são obrigatórios');
-  //   }
-
-  //   if (bodyRequest.nome) {
-  //     autorEncontrado.nome = bodyRequest.nome;
-  //   }
-
-  //   if (bodyRequest.email) {
-  //     autorEncontrado.email = bodyRequest.email;
-  //   }
-
-  //   return autorEncontrado;
-  // }
+    return this.autoresRepository.atualizarAutor(idAutor, bodyRequest);
+  }
 
   deletarAutor(idAutor: number) {
     this.listarAutor(idAutor);
