@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { LivrosRepository } from './livros.repository';
+import { criarLivroDto } from './livros.dto';
 
 @Injectable()
 export class LivrosService {
@@ -7,5 +8,9 @@ export class LivrosService {
 
   async listarLivros() {
     return await this.livrosRepository.listarLivros();
+  }
+
+  async criarLivro(bodyRequest: criarLivroDto) {
+    return await this.livrosRepository.criarLivro(bodyRequest);
   }
 }
