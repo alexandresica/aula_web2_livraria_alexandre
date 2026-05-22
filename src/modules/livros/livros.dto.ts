@@ -32,7 +32,7 @@ export class criarLivroDto {
   })
   descricao: string;
 
-  @IsNotEmpty({ message: 'O idAutor é obrigatório' })
+  @IsNotEmpty({ message: 'O id_Autor é obrigatório' })
   @Type(() => Number)
   id_Autor: number;
 }
