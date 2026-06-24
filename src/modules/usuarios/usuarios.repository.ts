@@ -5,15 +5,15 @@ import {
 } from '@nestjs/common';
 import { DRIZZLE } from 'src/db/database/database.constants';
 import { usuariosTabela } from 'src/db/schemas';
+import { CriarUsuariodto } from './usuarios.dto';
 import type { DrizzleDB } from 'src/db/types/drizzleDB';
-import { CriarAutordto } from '../autores/autores.dto';
 import { eq } from 'drizzle-orm';
 
 @Injectable()
 export class UsuariosRepository {
   constructor(@Inject(DRIZZLE) private readonly db: DrizzleDB) {}
 
-  async criarUsuario(usuario: CriarAutordto) {
+  async criarUsuario(usuario: CriarUsuariodto) {
     try {
       await this.db.insert(usuariosTabela).values({
         nome: usuario.nome,
